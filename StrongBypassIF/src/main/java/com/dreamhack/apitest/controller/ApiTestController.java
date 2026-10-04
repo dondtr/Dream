@@ -1,5 +1,11 @@
 package com.dreamhack.apitest.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URLDecoder;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,14 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
-
-
-import java.util.Arrays;
 
 @Controller
 public class ApiTestController {
@@ -75,7 +73,6 @@ public class ApiTestController {
             return "reqResult";
         }
         host = host.replaceAll("\\s+", "");
-as
         if (!path.startsWith("/")) path = '/' + path;
         path = path.replaceAll("\\s+", "");
 

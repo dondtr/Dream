@@ -1,0 +1,3 @@
+com\dreamhack\apitest\ApiTestApplication.class
+com\dreamhack\apitest\api\TestApi.class
+com\dreamhack\apitest\controller\ApiTestController.class

